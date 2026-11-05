@@ -16,7 +16,7 @@ Proyecto académico desarrollado por **Andrés Olguín y Miguel Margas**, origin
 | Generar rutina | Selección secuencial de ejercicios de la intensidad elegida y suma de minutos |
 | Avanzar semana | Incrementa el contador de semana del gestor |
 
-**Detalle técnico:** la selección de rutina intenta evitar ejercicios usados la semana anterior. Se identificó una **limitación en la semana 1**: la condición actual compara `ultimaSemanaUsado = 0` con `semanaActual - 1 = 0`, lo que puede excluir ejercicios recién creados. No se ha corregido esa lógica en este cambio de documentación; está registrada como mejora pendiente.
+**Detalle técnico:** la selección de rutina intenta evitar ejercicios usados la semana anterior. Se identificó una **limitación en la semana 1**: la condición actual compara `ultimaSemanaUsado = 0` con `semanaActual - 1 = 0`, lo que puede excluir ejercicios recién creados. La corrección está registrada en [la incidencia #2](https://github.com/andres-olguin/routine-planner-cpp/issues/2); todavía requiere una prueba de regresión del menú.
 
 ## Inicio rápido
 
