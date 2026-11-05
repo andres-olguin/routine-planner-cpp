@@ -1,25 +1,32 @@
 #include "SistemaEntrenamiento.h"
 
-#include <cassert>
+#include <stdexcept>
 #include <string>
+
+static void require(bool condition, const char* message) {
+    if (!condition) {
+        throw std::runtime_error(message);
+    }
+}
 
 int main() {
     EjercicioCardio cardio(101, "Caminata", "Basico", 20, "Aerobico", 0);
     EjercicioFuerza fuerza(202, "Sentadilla", "Intermedio", 15, "Piernas", 1);
 
-    assert(cardio.getId() == 101);
-    assert(cardio.getTipo() == "Cardiovascular");
-    assert(cardio.getIntensidad() == "Basico");
-    assert(cardio.getTiempo() == 20);
-    assert(cardio.getUltimaSemana() == 0);
+    // Evaluaciones explícitas: no desaparecen en builds Release con NDEBUG.
+    require(cardio.getId() == 101, "ID de cardio incorrecto");
+    require(cardio.getTipo() == "Cardiovascular", "Tipo de cardio incorrecto");
+    require(cardio.getIntensidad() == "Basico", "Intensidad de cardio incorrecta");
+    require(cardio.getTiempo() == 20, "Duracion de cardio incorrecta");
+    require(cardio.getUltimaSemana() == 0, "Semana inicial incorrecta");
 
     cardio.setUltimaSemana(2);
-    assert(cardio.getUltimaSemana() == 2);
+    require(cardio.getUltimaSemana() == 2, "No se actualizo la semana");
     cardio.actualizarDatos("Caminar", "Intermedio", 25, "Aerobico moderado");
-    assert(cardio.getIntensidad() == "Intermedio");
-    assert(cardio.getTiempo() == 25);
+    require(cardio.getIntensidad() == "Intermedio", "No se actualizo la intensidad");
+    require(cardio.getTiempo() == 25, "No se actualizo la duracion");
 
-    assert(fuerza.getTipo() == "Fuerza");
-    assert(fuerza.getUltimaSemana() == 1);
+    require(fuerza.getTipo() == "Fuerza", "Tipo de fuerza incorrecto");
+    require(fuerza.getUltimaSemana() == 1, "Semana de fuerza incorrecta");
     return 0;
 }
